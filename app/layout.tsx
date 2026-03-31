@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import { Inter, Montserrat, Poppins } from 'next/font/google';
 import Link from 'next/link';
 import { Shield, CheckCircle2, MapPin, Heart, Sparkles } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 // --- HUB-SPOT GRADE TYPOGRAPHY CONFIGURATION ---
@@ -153,6 +154,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </footer>
 
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
