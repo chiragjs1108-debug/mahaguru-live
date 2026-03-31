@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import { Inter, Montserrat, Poppins } from 'next/font/google';
 import Link from 'next/link';
 import { Shield, CheckCircle2, MapPin, Heart, Sparkles } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
 // --- HUB-SPOT GRADE TYPOGRAPHY CONFIGURATION ---
@@ -73,6 +74,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex-1 flex flex-col pt-[72px]">
             {children}
           </div>
+
+          {/* --- VERCEL SPEED INSIGHTS --- */}
+          <SpeedInsights />
 
           {/* --- GLOBAL SAAS FOOTER --- */}
           <footer className="bg-slate-950 pt-20 pb-10 border-t border-slate-900 mt-auto shrink-0">
