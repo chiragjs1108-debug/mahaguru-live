@@ -10,6 +10,7 @@ import {
 import TopStateProfiles from '@/components/TopStateProfiles';
 import ApexInstitutes from '@/components/ApexInstitutes';
 import AyushIntelligence from '../../components/AyushIntelligence'; // FIX: Changed from '@/components/...'
+import StateMatrixTable from '../../components/StateMatrixTable';
 interface StateHub {
   slug: string;
   state_name: string;
@@ -161,93 +162,13 @@ export default function BamsMasterClient({ allStates, nationalStats }: Props) {
         </div>
       </section>
 
-      {/* ── SECTION 6: THE DUAL-ACTION A-Z MATRIX (Elite SaaS Redesign) ────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-[#F8FAFC]">
-        <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">The A-Z State Matrix</h2>
-            <p className="text-slate-500 font-medium mt-2 max-w-2xl">
-              Select your state below to instantly access its complete college directory or the official 2026 counseling rules.
-            </p>
-          </div>
-          
-          {/* Dynamic Match Counter */}
-          <div className="hidden md:flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-xl shadow-sm">
-            <MapPin size={16} className="text-brand-cyan" />
-            <span className="text-sm font-bold text-slate-700">
-              {allStates.filter(s => s.state_name.toLowerCase().includes(searchQuery.toLowerCase())).length} States Found
-            </span>
-          </div>
-        </div>
+      {/* ── SECTION 6: THE A-Z STATE MATRIX (Polished Atlas Version) ────── */}
+<section id="state-matrix" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-[#F8FAFC]">
 
-        {/* The Grid: 1 col on Mobile, 2 on Tablet, 3 on Desktop, 4 on Widescreen */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
-          {allStates
-            .filter(s => s.state_name.toLowerCase().includes(searchQuery.toLowerCase()))
-            .map((state) => (
-            <div 
-              key={state.slug} 
-              className="bg-white border border-slate-200 rounded-[1.5rem] p-4 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-slate-300 transition-all duration-300 flex flex-col h-full group"
-            >
-              {/* State Header */}
-              <div className="flex items-center justify-between mb-5 px-1">
-                <h4 className="text-lg font-black text-slate-900 group-hover:text-brand-cyan transition-colors">{state.state_name}</h4>
-                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 group-hover:bg-cyan-50 group-hover:border-cyan-100 transition-colors">
-                  <MapPin size={14} className="text-slate-400 group-hover:text-cyan-600 transition-colors" />
-                </div>
-              </div>
-              
-              {/* Dual-Action UI Pills */}
-              <div className="flex flex-col gap-2.5 mt-auto">
-                
-                {/* 1. College Directory Action (Cyan Theme) */}
-                <Link 
-                  href={`/bams-colleges/${state.slug}`} 
-                  className="group/dir flex items-center justify-between bg-slate-50 hover:bg-cyan-50/50 border border-slate-100 hover:border-cyan-200/60 p-3 rounded-xl transition-all duration-300"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center group-hover/dir:border-cyan-200 group-hover/dir:shadow-sm transition-all">
-                      <Building2 size={12} className="text-slate-500 group-hover/dir:text-cyan-600" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 group-hover/dir:text-cyan-600/80 transition-colors">Directory</span>
-                      <span className="text-xs font-bold text-slate-700 group-hover/dir:text-cyan-950 transition-colors">{state.total_colleges} BAMS Colleges</span>
-                    </div>
-                  </div>
-                  <ArrowRight size={14} className="text-slate-300 group-hover/dir:text-cyan-600 group-hover/dir:translate-x-0.5 transition-transform" />
-                </Link>
 
-                {/* 2. Counselling Process Action (Orange Theme) */}
-                <Link 
-                  href={`/counselling/bams/${state.slug}`} 
-                  className="group/proc flex items-center justify-between bg-slate-50 hover:bg-orange-50/50 border border-slate-100 hover:border-orange-200/60 p-3 rounded-xl transition-all duration-300"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center group-hover/proc:border-orange-200 group-hover/proc:shadow-sm transition-all">
-                      <Globe size={12} className="text-slate-500 group-hover/proc:text-orange-600" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 group-hover/proc:text-orange-600/80 transition-colors">Process</span>
-                      <span className="text-xs font-bold text-slate-700 group-hover/proc:text-orange-950 transition-colors line-clamp-1">{state.counseling_authority || 'State'} Rules</span>
-                    </div>
-                  </div>
-                  <ArrowRight size={14} className="text-slate-300 group-hover/proc:text-orange-600 group-hover/proc:translate-x-0.5 transition-transform" />
-                </Link>
-
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Empty State Fallback (If search yields 0 results) */}
-        {allStates.filter(s => s.state_name.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
-          <div className="w-full bg-white border border-slate-200 rounded-[2rem] p-12 text-center shadow-sm">
-            <MapPin size={40} className="mx-auto text-slate-300 mb-4" />
-            <h3 className="text-xl font-black text-slate-900 mb-2">No states found</h3>
-            <p className="text-sm text-slate-500 font-medium">We couldn't find a match for "{searchQuery}". Try searching for a different state.</p>
-          </div>
-        )}
-      </section>
+  {/* Pass the allStates data from your Supabase fetch to the table */}
+  <StateMatrixTable dbStates={allStates} />
+</section>
 
       {/* ── SECTION 7: THE ADMISSION ROADMAP ───────────────────────────────── */}
       <section className="bg-white py-20 border-t border-slate-200">
