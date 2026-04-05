@@ -7,6 +7,7 @@ import { Inter, Montserrat, Poppins } from 'next/font/google';
 import Link from 'next/link';
 import { Shield, CheckCircle2, MapPin, Heart, Sparkles } from 'lucide-react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 // --- HUB-SPOT GRADE TYPOGRAPHY CONFIGURATION ---
@@ -77,6 +78,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* --- VERCEL SPEED INSIGHTS --- */}
           <SpeedInsights />
+          
+          {/* --- VERCEL WEB ANALYTICS --- */}
+          <Analytics />
 
           {/* --- GLOBAL SAAS FOOTER --- */}
           <footer className="bg-slate-950 pt-20 pb-10 border-t border-slate-900 mt-auto shrink-0">
